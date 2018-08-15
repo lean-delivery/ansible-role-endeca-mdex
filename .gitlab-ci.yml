@@ -1,0 +1,76 @@
+---
+# Run all tests
+stages:
+  - lint
+  - Deployment test
+
+# Check OS, ansible, molecule, docker version
+before_script:
+  - ansible --version
+  - molecule --version
+
+variables:
+  GET_SOURCES_ATTEMPTS: "5"
+  ANSIBLE_INVENTORY: "/home/gitlab-runner/.local/lib/python2.7/site-packages/epam_ansible/inventory/epc.py"
+  ANSIBLE_LIBRARY: "/home/gitlab-runner/.local/lib/python2.7/site-packages/epam_ansible"
+  ANSIBLE_INVENTORY_PLUGINS: "/home/gitlab-runner/.local/lib/python2.7/site-packages/epam_ansible/inventory/epc.py"
+
+# Tests for EPC driver for MDEX 11.3.0
+EPC endeca-mdex 11.3.0:
+  variables:
+    EPC_REGION: EPAM-BY2
+  stage: Deployment test
+  script:
+    - molecule test -s cloud-epc
+  tags:
+    - delegated
+
+# Tests for AWS driver for MDEX 11.3.0
+AWS endeca-mdex 11.3.0:
+  variables:
+    EPC_REGION: AWS-EUCENTRAL
+  stage: Deployment test
+  script:
+    - molecule test -s cloud-aws
+  tags:
+    - delegated
+
+# Tests for Docker driver for MDEX 11.3.0
+Docker endeca-mdex 11.3.0:
+  stage: deployment test
+  script:
+    - molecule test -s docker-11.3.0
+  tags:
+    - docker
+
+# Tests for Docker driver for MDEX 6.5.2
+Docker endeca-mdex 6.5.2:
+  stage: deployment test
+  script:
+    - molecule test -s docker-6.5.2
+  tags:
+    - docker
+
+# Tests for Docker driver for MDEX 6.5.1
+Docker endeca-mdex 6.5.1:
+  stage: deployment test
+  script:
+    - molecule test -s docker-6.5.1
+  tags:
+    - docker
+
+# Tests for Docker driver for MDEX 6.4.1.2
+Docker endeca-mdex 6.4.1.2:
+  stage: deployment test
+  script:
+    - molecule test -s docker-6.4.1.2
+  tags:
+    - docker
+
+# Tests for Docker driver for MDEX 6.4.0
+Docker endeca-mdex 6.4.0:
+  stage: deployment test
+  script:
+    - molecule test -s docker-6.4.0
+  tags:
+    - docker

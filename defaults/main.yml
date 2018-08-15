@@ -1,0 +1,23 @@
+---
+# full version of Endeca MDEX
+mdex_version: "6.5.2"
+# path to install MDEX
+base_root: "/opt"
+
+mdex_port: "8000"
+
+# artifact source transport
+transport: "web"
+# available are:
+# - "web" Fetching artifact from custom web uri
+# - "local" Local artifact
+
+transport_local: "/tmp/V78211-01.zip"
+transport_web: "http://my-storage.example.com/V861206-01.zip"
+
+
+# path to download MDEX
+download_path: "/tmp"
+
+endeca_user: "endeca"
+endeca_group: "endeca"
