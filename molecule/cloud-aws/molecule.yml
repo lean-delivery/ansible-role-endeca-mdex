@@ -10,7 +10,7 @@ lint:
 platforms:
   - name: test-endeca-mdex
     image: CentOS6_64-bit
-    shape: mini
+    shape: micro
     region: AWS-EUCENTRAL
     wait_timeout: 1800
     groups:
