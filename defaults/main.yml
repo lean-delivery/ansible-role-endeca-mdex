@@ -7,7 +7,7 @@ base_root: "/opt"
 mdex_port: "8000"
 
 # artifact source transport
-transport: "web"
+transport: "local"
 # available are:
 # - "web" Fetching artifact from custom web uri
 # - "local" Local artifact
