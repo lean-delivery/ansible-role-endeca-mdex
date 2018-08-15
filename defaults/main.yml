@@ -15,7 +15,6 @@ transport: "local"
 transport_local: "/tmp/V78211-01.zip"
 transport_web: "http://my-storage.example.com/V861206-01.zip"
 
-
 # path to download MDEX
 download_path: "/tmp"
 
