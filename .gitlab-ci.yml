@@ -2,7 +2,7 @@
 # Run all tests
 stages:
   - lint
-  - Deployment test
+  - deployment test
 
 # Check OS, ansible, molecule, docker version
 before_script:
@@ -19,7 +19,7 @@ variables:
 EPC endeca-mdex 11.3.0:
   variables:
     EPC_REGION: EPAM-BY2
-  stage: Deployment test
+  stage: deployment test
   script:
     - molecule test -s cloud-epc
   tags:
@@ -29,7 +29,7 @@ EPC endeca-mdex 11.3.0:
 AWS endeca-mdex 11.3.0:
   variables:
     EPC_REGION: AWS-EUCENTRAL
-  stage: Deployment test
+  stage: deployment test
   script:
     - molecule test -s cloud-aws
   tags:
