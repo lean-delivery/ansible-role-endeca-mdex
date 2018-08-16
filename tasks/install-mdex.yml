@@ -31,6 +31,13 @@
         createhome: True
         append: True
 
+    - name: "Create endeca root folder with {{ endeca_user }} as owner"
+      file:
+        owner: "{{ endeca_user }}"
+        group: "{{ endeca_group }}"
+        path: "{{ base_root }}/endeca"
+        state: "directory"
+
     - name: "Ensure {{ mdex_installer.files[0] }} is executable"
       file:
       args:
@@ -45,6 +52,7 @@
 
 # MDEX versions lower 6.5.2
 - name: "Run installer"
+  become_user: "{{ endeca_user }}"
   command: "{{ mdex_installer_bin }} --silent --target {{ base_root }}"
   args:
     creates: "{{ mdex_path }}"
@@ -59,6 +67,7 @@
         dest: "{{ download_path }}/mdex_installer_{{ mdex_version }}.properties"
 
     - name: "Run installer"
+      become_user: "{{ endeca_user }}"
       command: "{{ mdex_installer_bin }} -i silent -f mdex_installer_{{ mdex_version }}.properties"
       args:
         creates: "{{ mdex_path }}"
@@ -75,15 +84,6 @@
         setype: "http_port_t"
         state: "present"
       when: ansible_selinux.status == "enabled"
-
-    - name: "Chown endeca directory to {{ endeca_user }}"
-      file:
-        owner: "{{ endeca_user }}"
-        group: "{{ endeca_group }}"
-        path: "{{ mdex_path }}"
-        state: "directory"
-        mode: "0775"
-        recurse: True
 
     - name: "Put mdex profile"
       copy:
