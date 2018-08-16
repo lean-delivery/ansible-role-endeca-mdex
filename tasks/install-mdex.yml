@@ -76,7 +76,7 @@
         state: "present"
       when: ansible_selinux.status == "enabled"
 
-    - name: "Chown endeca directory to {{ endeca_user }}"
+    - name: "Chown {{ mdex_path }} to {{ endeca_user }}"
       file:
         owner: "{{ endeca_user }}"
         group: "{{ endeca_group }}"
