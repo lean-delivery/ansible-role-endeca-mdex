@@ -42,6 +42,8 @@
       file:
       args:
         path: "{{ download_path }}/{{ mdex_installer.files[0] }}"
+        owner: "{{ endeca_user }}"
+        group: "{{ endeca_group }}"
         mode: "0755"
 
   become: True
