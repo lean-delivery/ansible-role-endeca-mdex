@@ -3,7 +3,7 @@
 # it's enough to check only if path exists
 - name: check MDEX installation
   stat:
-    path: "{{ base_root }}/endeca/MDEX/{{ mdex_version }}"
+    path: "{{ mdex_path }}"
   register: mdex_dir
 
 - name: "Install section"
