@@ -25,9 +25,6 @@ Requirements
 
 For more information regarding support matrix please visit <https://support.oracle.com>
 
-Check if installed next packages on target system:
-  - sudo
-
 
 Role Variables
 --------------
