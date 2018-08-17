@@ -16,12 +16,11 @@ Requirements
  - Minimal Version of the ansible for installation: 2.5
  - **Supported MDEX versions**:
    - 6.x.x
-   - 11.3.0
-   - _lower and higher versions should be retested_
+   - 11.x
+   - _higher versions should be retested_
  - **Supported OS**:
    - CentOS
      - 6
-     - 7
 
 For more information regarding support matrix please visit <https://support.oracle.com>
 

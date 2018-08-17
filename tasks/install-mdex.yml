@@ -49,7 +49,10 @@
   args:
     creates: "{{ mdex_path }}"
   become: True
-  when: mdex_version is match("^[1-6].[0-4].[0-9]") or mdex_version is match("^6.5.[0-1]")
+  when: |
+    mdex_version.split('.')[0] | int <= 6 and
+    mdex_version.split('.')[1] | int <= 5 and
+    mdex_version.split('.')[2] | int <= 1
 
 - name: "Install MDEX{{ mdex_version }}"
   block:
@@ -64,7 +67,11 @@
         creates: "{{ mdex_path }}"
       become: True
 
-  when: not (mdex_version is match("^[1-6].[0-4].[0-9]") or mdex_version is match("^6.5.[0-1]"))
+  when: |
+    (  mdex_version.split('.')[0] | int == 6 and
+       mdex_version.split('.')[1] | int == 5 and
+       mdex_version.split('.')[2] | int == 2 ) or
+    mdex_version.split('.')[0] | int >= 11
 
 - name: "Become section"
   block:
