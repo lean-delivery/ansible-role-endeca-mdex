@@ -4,6 +4,3 @@ mdex_path: "{{ base_root }}/endeca/MDEX/{{ mdex_version }}"
 
 requirements:
   - "unzip"
-  - "policycoreutils-python"
-  - "libsemanage-python"
-  - "libselinux-python"

@@ -75,14 +75,6 @@
 
 - name: "Become section"
   block:
-    - name: "Enable connections to {{ mdex_port }} port"
-      seport:
-        ports: "{{ mdex_port }}"
-        proto: "tcp"
-        setype: "http_port_t"
-        state: "present"
-      when: ansible_selinux.status == "enabled" and not ( ansible_selinux.mode == "disabled" )
-
     - name: "Chown {{ mdex_path }} to {{ endeca_user }}"
       file:
         owner: "{{ endeca_user }}"

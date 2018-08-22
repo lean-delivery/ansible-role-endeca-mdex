@@ -5,4 +5,4 @@
     - role: ansible-role-endeca-mdex
       transport: "web"
       mdex_version: "11.3.0"
-      transport_web: "{{ lookup('env','STORAGE_AWS') }}/oracle-commerce-suite/commerce/endeca11.3.0/V861206-01.zip"
+      transport_web: "{{ lookup('env','STORAGE_EPC') }}/oracle-commerce-suite/commerce/endeca11.3.0/V861206-01.zip"
