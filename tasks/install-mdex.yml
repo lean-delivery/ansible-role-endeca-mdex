@@ -1,0 +1,96 @@
+---
+- name: "Become section"
+  block:
+    - name: "Install requirements"
+      package:
+        name: "{{ package }}"
+        state: "present"
+      loop: "{{ requirements }}"
+      loop_control:
+        loop_var: package
+
+    - name: "Extract MDEX installer"
+      unarchive:
+        src: "{{ mdex_artifact }}"
+        dest: "{{ download_path }}"
+        list_files: True
+      register: mdex_installer
+
+    - name: "Create endeca group"
+      become: True
+      group:
+        name: "{{ endeca_group }}"
+        state: "present"
+
+    - name: "Create endeca user"
+      user:
+        name: "{{ endeca_user }}"
+        group: "{{ endeca_group }}"
+        state: "present"
+        home: "/home/{{ endeca_user }}"
+        createhome: True
+        append: True
+
+    - name: "Ensure {{ mdex_installer.files[0] }} is executable"
+      file:
+      args:
+        path: "{{ download_path }}/{{ mdex_installer.files[0] }}"
+        mode: "0755"
+
+  become: True
+
+- name: "Set mdex_installer_bin"
+  set_fact:
+    mdex_installer_bin: "{{ download_path }}/{{ mdex_installer.files[0] }}"
+
+# MDEX versions lower 6.5.2
+- name: "Run installer"
+  command: "{{ mdex_installer_bin }} --silent --target {{ base_root }}"
+  args:
+    creates: "{{ mdex_path }}"
+  become: True
+  when: |
+    mdex_version.split('.')[0] | int <= 6 and
+    mdex_version.split('.')[1] | int <= 5 and
+    mdex_version.split('.')[2] | int <= 1
+
+- name: "Install MDEX{{ mdex_version }}"
+  block:
+    - name: "Create silent install file for MDEX{{ mdex_version }}"
+      template:
+        src: "mdex_installer.properties.j2"
+        dest: "{{ download_path }}/mdex_installer_{{ mdex_version }}.properties"
+
+    - name: "Run installer"
+      command: "{{ mdex_installer_bin }} -i silent -f mdex_installer_{{ mdex_version }}.properties"
+      args:
+        creates: "{{ mdex_path }}"
+      become: True
+
+  when: |
+    (  mdex_version.split('.')[0] | int == 6 and
+       mdex_version.split('.')[1] | int == 5 and
+       mdex_version.split('.')[2] | int == 2 ) or
+    mdex_version.split('.')[0] | int >= 11
+
+- name: "Become section"
+  block:
+    - name: "Chown {{ mdex_path }} to {{ endeca_user }}"
+      file:
+        owner: "{{ endeca_user }}"
+        group: "{{ endeca_group }}"
+        path: "{{ mdex_path }}"
+        state: "directory"
+        mode: "0775"
+        recurse: True
+
+    - name: "Put mdex profile"
+      copy:
+        src: "{{ mdex_path }}/mdex_setup_sh.ini"
+        dest: "/etc/profile.d/mdex.sh"
+        owner: "root"
+        group: "root"
+        mode: "0555"
+        remote_src: True
+
+  become: True

@@ -1,0 +1,22 @@
+---
+# Since path base_root/endeca/MDEX/{{ mdex_version }} is created by installer,
+# it's enough to check only if path exists
+- name: check MDEX installation
+  stat:
+    path: "{{ mdex_path }}"
+  register: mdex_dir
+
+- name: "Install section"
+  block:
+    - name: "Fetch MDEX artifact with {{ transport }} transport"
+      include_tasks: "{{ transport_driver }}"
+      with_first_found:
+        - "fetch/{{ transport }}.yml"
+        - "fetch/unknown-transport.yml"
+      loop_control:
+        loop_var: transport_driver
+
+    - name: "Install MDEX {{ mdex_version }}"
+      include_tasks: "install-mdex.yml"
+
+  when: mdex_dir.stat.exists == False

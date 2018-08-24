@@ -1,0 +1,11 @@
+#Choose Install Folder
+#---------------------
+USER_INSTALL_DIR={{ base_root }}
+
+#Install
+#-------
+{% if mdex_version.split('.')[0] | int >= 11 %}
+
+-fileOverwrite_{{ mdex_path }}/Uninstall/Uninstall_Oracle Commerce MDEX Engine {{ mdex_version }} x64 Edition.lax=Yes
+
+{% endif %}
