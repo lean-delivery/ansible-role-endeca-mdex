@@ -21,6 +21,7 @@ Requirements
  - **Supported OS**:
    - CentOS
      - 6
+     - 7
 
 For more information regarding support matrix please visit <https://support.oracle.com>
 
