@@ -9,6 +9,17 @@
       loop_control:
         loop_var: package
 
+    - name: "Install ansible selinux configure libraries"
+      package:
+        name: "{{ selibs_item }}"
+        state: present
+      loop:
+        - policycoreutils-python
+        - libsemanage-python
+      loop_control:
+        loop_var: selibs_item
+      when: ansible_selinux.status == "enabled"
+
     - name: "Extract MDEX installer"
       unarchive:
         src: "{{ mdex_artifact }}"
