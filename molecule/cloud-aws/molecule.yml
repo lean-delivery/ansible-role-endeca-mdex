@@ -32,7 +32,7 @@ provisioner:
   env:
     ANSIBLE_LIBRARY: ${ANSIBLE_LIBRARY}
 scenario:
-  name: cloud-aws-delegated
+  name: cloud-aws
 verifier:
   name: testinfra
   options:
