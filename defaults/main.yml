@@ -4,7 +4,7 @@ mdex_version: "6.5.2"
 # path to install MDEX
 base_root: "/opt"
 
-mdex_port: "8001"
+mdex_port: "8081"
 
 # artifact source transport
 transport: "local"
