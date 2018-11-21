@@ -3,11 +3,8 @@
   block:
     - name: "Install requirements"
       package:
-        name: "{{ package }}"
+        name: "{{ requirements }}"
         state: "present"
-      loop: "{{ requirements }}"
-      loop_control:
-        loop_var: package
 
     - name: "Install ansible selinux configure libraries"
       package:
@@ -93,7 +90,7 @@
         proto: "tcp"
         setype: "http_port_t"
         state: "present"
-      when: ansible_selinux.status == "enabled" and not ansible_selinux.mode == "disabled"
+      when: ansible_selinux.status == "enabled" and ansible_selinux.mode != "disabled"
 
     - name: "Chown {{ mdex_path }} to {{ endeca_user }}"
       file:
