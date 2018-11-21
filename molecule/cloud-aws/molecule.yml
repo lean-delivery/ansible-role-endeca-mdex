@@ -10,7 +10,7 @@ lint:
   options:
     config-file: molecule/yamllint.yml
 platforms:
-  - name: test-aws-centos7-ansible-role-endeca-mdex
+  - name: test-aws-centos6-ansible-role-endeca-mdex
     image: CentOS6_64
     shape: micro
     region: AWS-EUCENTRAL
@@ -19,7 +19,7 @@ platforms:
       - rhel_family
 provisioner:
   name: ansible
-  # log: True
+  log: True
   playbooks:
     create: ../resources/provisioning/create.yml
     prepare: ../resources/provisioning/prepare.yml
