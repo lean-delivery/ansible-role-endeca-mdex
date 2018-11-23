@@ -28,7 +28,7 @@ AWS endeca-mdex 11.3.0:
     EPC_REGION: AWS-EUCENTRAL
   stage: deployment test
   script:
-    - molecule test -s cloud-aws
+    - molecule -debug test -s cloud-aws
   tags:
     - delegated
 
