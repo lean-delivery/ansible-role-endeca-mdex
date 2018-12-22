@@ -12,7 +12,7 @@ lint:
 platforms:
   - name: test-aws-centos6-ansible-role-endeca-mdex
     image: CentOS6_64-bit
-    shape: micro
+    shape: small
     region: AWS-EUCENTRAL
     wait_timeout: 1800
     groups:
