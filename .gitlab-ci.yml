@@ -19,7 +19,7 @@ EPC endeca-mdex 11.3.0:
     EPC_REGION: EPAM-BY2
   stage: deployment test
   script:
-    - molecule test -s cloud-epc
+    - molecule test -s cloud-epc-delegated
   tags:
     - delegated
 
@@ -29,7 +29,7 @@ AWS endeca-mdex 11.3.0:
     EPC_REGION: AWS-EUCENTRAL
   stage: deployment test
   script:
-    - molecule test -s cloud-aws
+    - molecule test -s cloud-aws-delegated
   tags:
     - delegated
 
