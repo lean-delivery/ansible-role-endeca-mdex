@@ -24,7 +24,7 @@ EPC endeca-mdex 11.3.0:
     - delegated
 
 # Tests for AWS driver for MDEX 11.3.0
-AWS endeca-mdex 11.3.0:
+.AWS endeca-mdex 11.3.0:
   variables:
     EPC_REGION: AWS-EUCENTRAL
   stage: deployment test
