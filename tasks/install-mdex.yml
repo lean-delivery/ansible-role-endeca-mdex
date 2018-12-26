@@ -59,7 +59,7 @@
     creates: "{{ mdex_path }}"
   become: True
   when: |
-    mdex_version is version('6.5.2', '<=')
+    mdex_version is version('6.5.1', '<=')
 
 - name: "Install MDEX{{ mdex_version }}"
   block:
@@ -87,7 +87,9 @@
         proto: "tcp"
         setype: "http_port_t"
         state: "present"
-      when: ansible_selinux.status == "enabled" and ansible_selinux.mode != "disabled"
+      when:
+        - ansible_selinux.status == "enabled"
+        - ansible_selinux.mode != "disabled"
 
     - name: "Chown {{ mdex_path }} to {{ endeca_user }}"
       file:
