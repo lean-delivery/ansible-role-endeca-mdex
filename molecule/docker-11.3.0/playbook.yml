@@ -1,6 +1,6 @@
 ---
 - name: Converge
-  hosts: all
+  hosts: endeca_mdex
   roles:
     - role: ansible-role-endeca-mdex
       transport: "web"

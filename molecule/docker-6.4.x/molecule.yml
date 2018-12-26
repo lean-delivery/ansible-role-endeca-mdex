@@ -6,24 +6,25 @@ driver:
 lint:
   name: yamllint
   options:
-    config-file: molecule/yamllint.yml
+    config-file: .yamllint
 platforms:
-  - name: test-endeca-mdex-6.5.1
+  - name: test-endeca-mdex-6.4.0
     image: centos:6
     groups:
-      - endeca-mdex
+      - endeca_mdex
+  - name: test-endeca-mdex-6.4.1.2
+    image: centos:6
+    groups:
+      - endeca_mdex
 provisioner:
   name: ansible
   config_options:
     ssh_connection:
       control_path: "/var/ans/%%h"
-  env:
-    ANSIBLE_LIBRARY:
-      /home/gitlab-runner/.local/lib/python2.7/site-packages/epam_ansible
   lint:
     name: ansible-lint
 scenario:
-  name: docker-6.5.1
+  name: docker-6.4.x
 verifier:
   name: testinfra
   lint:
