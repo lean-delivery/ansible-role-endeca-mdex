@@ -10,15 +10,12 @@
 
     - name: "Install ansible selinux configure libraries"
       package:
-        name: "{{ selibs_item }}"
+        name:
+          - policycoreutils-python
+          - libsemanage-python
         state: present
       register: installed_selinux_package
       until: installed_selinux_package is succeeded
-      loop:
-        - policycoreutils-python
-        - libsemanage-python
-      loop_control:
-        loop_var: selibs_item
       when: ansible_selinux.status == "enabled"
 
     - name: "Extract MDEX installer"
@@ -62,9 +59,7 @@
     creates: "{{ mdex_path }}"
   become: True
   when: |
-    mdex_version.split('.')[0] | int <= 6 and
-    mdex_version.split('.')[1] | int <= 5 and
-    mdex_version.split('.')[2] | int <= 1
+    mdex_version is version('6.5.2', '<=')
 
 - name: "Install MDEX{{ mdex_version }}"
   block:
@@ -80,10 +75,8 @@
       become: True
 
   when: |
-    (  mdex_version.split('.')[0] | int == 6 and
-       mdex_version.split('.')[1] | int == 5 and
-       mdex_version.split('.')[2] | int == 2 ) or
-    mdex_version.split('.')[0] | int >= 11
+    mdex_version is version('6.5.2', '==') or
+    mdex_version is version('11', '>=')
 
 - name: "Become section"
   block:

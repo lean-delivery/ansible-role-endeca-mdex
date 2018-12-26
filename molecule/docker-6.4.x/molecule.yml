@@ -8,10 +8,14 @@ lint:
   options:
     config-file: .yamllint
 platforms:
-  - name: test-endeca-mdex-6.5.1
+  - name: test-endeca-mdex-6.4.0
     image: centos:6
     groups:
-      - endeca-mdex
+      - endeca_mdex_6.4.0
+  - name: test-endeca-mdex-6.4.1.2
+    image: centos:6
+    groups:
+      - endeca_mdex_6.4.1.2
 provisioner:
   name: ansible
   config_options:
@@ -20,7 +24,7 @@ provisioner:
   lint:
     name: ansible-lint
 scenario:
-  name: docker-6.5.1
+  name: docker-6.4.x
 verifier:
   name: testinfra
   lint:

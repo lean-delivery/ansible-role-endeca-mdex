@@ -41,34 +41,18 @@ Docker endeca-mdex 11.3.0:
   tags:
     - docker
 
-# Tests for Docker driver for MDEX 6.5.2
-.Docker endeca-mdex 6.5.2:
+# Tests for Docker driver for MDEX 6.5.x
+Docker endeca-mdex 6.5.x:
   stage: deployment test
   script:
-    - molecule test -s docker-6.5.2
+    - molecule test -s docker-6.5.x
   tags:
     - docker
 
-# Tests for Docker driver for MDEX 6.5.1
-.Docker endeca-mdex 6.5.1:
+# Tests for Docker driver for MDEX 6.4.x
+Docker endeca-mdex 6.4.x:
   stage: deployment test
   script:
-    - molecule test -s docker-6.5.1
-  tags:
-    - docker
-
-# Tests for Docker driver for MDEX 6.4.1.2
-.Docker endeca-mdex 6.4.1.2:
-  stage: deployment test
-  script:
-    - molecule test -s docker-6.4.1.2
-  tags:
-    - docker
-
-# Tests for Docker driver for MDEX 6.4.0
-.Docker endeca-mdex 6.4.0:
-  stage: deployment test
-  script:
-    - molecule test -s docker-6.4.0
+    - molecule test -s docker-6.4.x
   tags:
     - docker

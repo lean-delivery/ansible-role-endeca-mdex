@@ -1,8 +1,0 @@
----
-- name: Converge
-  hosts: all
-  roles:
-    - role: ansible-role-endeca-mdex
-      transport: "web"
-      mdex_version: "6.4.1.2"
-      transport_web: "{{ lookup('env','STORAGE_EPC') }}/oracle-commerce-suite/commerce/endeca10.2/V40319-01.zip"
