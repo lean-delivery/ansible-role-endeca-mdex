@@ -1,5 +1,5 @@
 ---
-- name: Converge 6.4.0
+- name: Converge
   hosts: endeca_mdex
   roles:
     - role: ansible-role-endeca-mdex
