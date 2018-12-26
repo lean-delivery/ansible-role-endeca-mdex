@@ -11,11 +11,11 @@ platforms:
   - name: test-endeca-mdex-6.4.0
     image: centos:6
     groups:
-      - endeca_mdex_6.4.0
+      - endeca_mdex
   - name: test-endeca-mdex-6.4.1.2
     image: centos:6
     groups:
-      - endeca_mdex_6.4.1.2
+      - endeca_mdex
 provisioner:
   name: ansible
   config_options:
