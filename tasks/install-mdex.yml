@@ -3,11 +3,20 @@
   block:
     - name: "Install requirements"
       package:
-        name: "{{ package }}"
+        name: "{{ requirements }}"
         state: "present"
-      loop: "{{ requirements }}"
-      loop_control:
-        loop_var: package
+      register: installed_packages
+      until: installed_packages is succeeded
+
+    - name: "Install ansible selinux configure libraries"
+      package:
+        name:
+          - policycoreutils-python
+          - libsemanage-python
+        state: present
+      register: installed_selinux_package
+      until: installed_selinux_package is succeeded
+      when: ansible_selinux.status == "enabled"
 
     - name: "Extract MDEX installer"
       unarchive:
@@ -50,9 +59,7 @@
     creates: "{{ mdex_path }}"
   become: True
   when: |
-    mdex_version.split('.')[0] | int <= 6 and
-    mdex_version.split('.')[1] | int <= 5 and
-    mdex_version.split('.')[2] | int <= 1
+    mdex_version is version('6.5.1', '<=')
 
 - name: "Install MDEX{{ mdex_version }}"
   block:
@@ -68,13 +75,22 @@
       become: True
 
   when: |
-    (  mdex_version.split('.')[0] | int == 6 and
-       mdex_version.split('.')[1] | int == 5 and
-       mdex_version.split('.')[2] | int == 2 ) or
-    mdex_version.split('.')[0] | int >= 11
+    mdex_version is version('6.5.2', '==') or
+    mdex_version is version('11', '>=')
 
 - name: "Become section"
   block:
+
+    - name: "Enable connections to {{ mdex_port }} port"
+      seport:
+        ports: "{{ mdex_port }}"
+        proto: "tcp"
+        setype: "http_port_t"
+        state: "present"
+      when:
+        - ansible_selinux.status == "enabled"
+        - ansible_selinux.mode != "disabled"
+
     - name: "Chown {{ mdex_path }} to {{ endeca_user }}"
       file:
         owner: "{{ endeca_user }}"

@@ -3,6 +3,9 @@ endeca_mdex
 [![License](https://img.shields.io/badge/license-Apache-green.svg?style=flat)](https://raw.githubusercontent.com/lean-delivery/ansible-role-endeca-mdex/master/LICENSE)
 [![Build Status](https://travis-ci.org/lean-delivery/ansible-role-endeca-mdex.svg?branch=master)](https://travis-ci.org/lean-delivery/ansible-role-endeca-mdex)
 [![Build Status](https://gitlab.com/lean-delivery/ansible-role-endeca-mdex/badges/master/build.svg)](https://gitlab.com/lean-delivery/ansible-role-endeca-mdex)
+[![Galaxy](https://img.shields.io/badge/galaxy-lean__delivery.endeca__mdex-blue.svg)](https://galaxy.ansible.com/lean_delivery/endeca_mdex)
+![Ansible](https://img.shields.io/ansible/role/d/29126.svg)
+![Ansible](https://img.shields.io/badge/dynamic/json.svg?label=min_ansible_version&url=https%3A%2F%2Fgalaxy.ansible.com%2Fapi%2Fv1%2Froles%2F29126%2F&query=$.min_ansible_version)
 
 ## Summary
 --------------
