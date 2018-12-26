@@ -42,7 +42,7 @@ Docker endeca-mdex 11.3.0:
     - docker
 
 # Tests for Docker driver for MDEX 6.5.x
-Docker endeca-mdex 6.5.x:
+.Docker endeca-mdex 6.5.x:
   stage: deployment test
   script:
     - molecule test -s docker-6.5.x
@@ -50,7 +50,7 @@ Docker endeca-mdex 6.5.x:
     - docker
 
 # Tests for Docker driver for MDEX 6.4.x
-Docker endeca-mdex 6.4.x:
+.Docker endeca-mdex 6.4.x:
   stage: deployment test
   script:
     - molecule test -s docker-6.4.x
